@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <script>
+        let todolist=[
+       
+    ];
+    document.addEventListener("DOMContentLoaded", function(){
+        document.querySelector("#addbtn").addEventListener("click",addtaskHandler)
+    })
+    function addtaskHandler(){
+        let taskstring = document.getElementById("taskIp");
+        if(taskstring){
+        let Temptask={
+            task : taskstring.value,
+            completed : false
+        }
+        todolist.push(Temptask);
+        rendertask();
+        taskstring.value="";
+    }else{
+        alert("Do add task");
+
+    }
+    }
+    function rendertask(){
+        let ol = document.querySelector("ol");
+            ol.innerHTML="";
+        for(i=0;i<todolist.length;i++){
+           if(todolist[i].completed){
+            ol.innerHTML +="<li style='text-decoration : line-through'>"+todolist[i].task+"</li>"
+           }else{
+            ol.innerHTML +="<li>"+todolist[i].task+"<button onClick='taskDone("+i+")'>Done</button></li>"   
+           }
+        }
+    };
+    function taskDone(idx){
+        todolist[idx].completed=true;
+        console.log(todolist);
+        rendertask();
+    }
+
+
+
+
+    </script>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <label for="taskIp">Add Task : <input id="taskIp"></label>
+    <button id="addbtn">Add Task</button>
+    <hr/>
+    <ol>
+
+    </ol>
+
+
+    
+</body>
+</html>
